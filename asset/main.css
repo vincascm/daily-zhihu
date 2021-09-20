@@ -1,0 +1,117 @@
+body {
+    -webkit-tap-highlight-color: rgba(18,18,18,0);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #121212;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    display: block;
+}
+
+a {
+    text-decoration:none;
+}
+
+a:link {
+    color: #000000;
+}
+
+a:visited {
+    color: #666666;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+button, p, pre {
+    margin: 0;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: auto;
+    left: auto;
+    right: auto;
+    top: 0;
+    z-index: 2;
+    width: 400px;
+    height: 60px;
+    background-color: hsla(0,0%,100%,.9);
+}
+.banner .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.banner .text {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    flex-direction: column;
+    flex: 1 1;
+    width: auto;
+}
+.banner .text .title {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.18;
+    letter-spacing: .31px;
+    color: #121212;
+}
+.banner .text .desc {
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: .22px;
+    color: #444;
+}
+.banner .date {
+    letter-spacing: .26px;
+    margin-right: 18px;
+}
+.item-list {
+    margin-top: 90px;
+    margin-bottom: 40px;
+}
+.item-list .item {
+    height: 100px;
+    display: flex;
+    margin-top: 32px;
+}
+.item-list .item .text {
+    width: 260px;
+    margin-right: 32px;
+}
+.item-list .item .text .tips {
+    font-size: 13px;
+}
+.item-list .item .image {
+    border-radius: 3px;
+}
+.read-more {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: #03a9f4;
+    font-size: 13px;
+}
+a:link.read-more {
+    color: #fff;
+}
+a:visited.read-more {
+    color: #fff;
+}
+.footer {
+    margin-top: 40px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #666666;
+}
