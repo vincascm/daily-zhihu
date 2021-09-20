@@ -27,6 +27,8 @@ async fn render_content(content: Content) -> Result<Response> {
     let cal_date = cal_date.format("%m月%d日").to_string();
     context.insert("cal_date", &cal_date);
     let string = Tera::one_off(include_str!("../templates/index.html"), &context, false)?;
+    //let tera = Tera::new("templates/*")?;
+    //let string = tera.render("index.html", &context)?;
     let mut res = Response::new(StatusCode::Ok);
     res.set_content_type(HTML);
     res.set_body(string);

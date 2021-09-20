@@ -1,11 +1,8 @@
 body {
     -webkit-tap-highlight-color: rgba(18,18,18,0);
-    max-width: 640px;
     margin: 0 auto;
-    font-size: 16px;
     color: #121212;
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
-    display: block;
 }
 
 a {
@@ -32,30 +29,30 @@ button, p, pre {
     margin: 0;
 }
 
+.main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    place-items: center;
+    width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 .banner {
     display: flex;
     align-items: center;
-    position: fixed;
-    bottom: 0;
-    height: auto;
-    left: auto;
-    right: auto;
     top: 0;
-    z-index: 2;
-    width: 400px;
-    height: 60px;
+    height: 3.5rem;
+    margin-right: 0.5rem;
     background-color: hsla(0,0%,100%,.9);
 }
 .banner .logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
 }
 .banner .text {
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-box-flex: 1;
     flex-direction: column;
     flex: 1 1;
     width: auto;
@@ -75,30 +72,32 @@ button, p, pre {
     color: #444;
 }
 .banner .date {
-    letter-spacing: .26px;
-    margin-right: 18px;
+    letter-spacing: 0.06rem;
+    margin-right: 0.75rem;
 }
 .item-list {
-    margin-top: 90px;
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
 }
 .item-list .item {
-    height: 100px;
     display: flex;
-    margin-top: 32px;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
 }
 .item-list .item .text {
-    width: 260px;
-    margin-right: 32px;
+    margin-right: 1.5rem;
 }
 .item-list .item .text .tips {
     font-size: 13px;
 }
 .item-list .item .image {
+    width: 5rem;
+    height: 5rem;
     border-radius: 3px;
+    margin-right: 1.5rem;
 }
 .read-more {
-    padding: 5px 10px;
+    padding: 0.382rem 1rem;
     border-radius: 4px;
     background: #03a9f4;
     font-size: 13px;
@@ -110,8 +109,11 @@ a:visited.read-more {
     color: #fff;
 }
 .footer {
-    margin-top: 40px;
-    margin-bottom: 5px;
+    display: flex;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 0.5rem;
     font-size: 13px;
     color: #666666;
 }
