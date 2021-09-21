@@ -34,8 +34,6 @@ button, p, pre {
     grid-template-rows: auto 1fr auto;
     place-items: center;
     width: 100%;
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
 
 .banner {
@@ -46,17 +44,20 @@ button, p, pre {
     margin-right: 0.5rem;
     background-color: hsla(0,0%,100%,.9);
 }
+
 .banner .logo {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 0.5rem;
 }
+
 .banner .text {
     display: flex;
     flex-direction: column;
     flex: 1 1;
     width: auto;
 }
+
 .banner .text .title {
     font-weight: 600;
     font-size: 17px;
@@ -64,6 +65,7 @@ button, p, pre {
     letter-spacing: .31px;
     color: #121212;
 }
+
 .banner .text .desc {
     margin-top: 3px;
     font-size: 12px;
@@ -71,43 +73,56 @@ button, p, pre {
     letter-spacing: .22px;
     color: #444;
 }
+
 .banner .date {
     letter-spacing: 0.06rem;
     margin-right: 0.75rem;
 }
+
 .item-list {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
     margin-bottom: 3rem;
+    grid-template-columns: 1fr minmax(5rem, 40%);
 }
+
 .item-list .item {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 2rem;
 }
+
 .item-list .item .text {
-    margin-right: 1.5rem;
+    font-size: 1.15rem;
+    margin-right: 0.75rem;
 }
+
 .item-list .item .text .tips {
-    font-size: 13px;
+    font-size: 0.85rem;
 }
+
 .item-list .item .image {
     width: 5rem;
     height: 5rem;
     border-radius: 3px;
-    margin-right: 1.5rem;
 }
+
 .read-more {
     padding: 0.382rem 1rem;
     border-radius: 4px;
     background: #03a9f4;
     font-size: 13px;
 }
+
 a:link.read-more {
     color: #fff;
 }
+
 a:visited.read-more {
     color: #fff;
 }
+
 .footer {
     display: flex;
     margin-top: 2rem;
