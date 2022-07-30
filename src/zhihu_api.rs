@@ -46,7 +46,7 @@ pub struct Content {
 
 #[derive(Serialize, Deserialize)]
 pub struct Story {
-    pub image_hue: String,
+    pub image_hue: Option<String>,
     pub title: String,
     pub url: String,
     pub hint: String,
