@@ -26,7 +26,7 @@
                     <p class="title">{{item.title}}</p>
                     <span class="tips">{{item.hint}}</span>
                 </div>
-                <img class="image" src="{{item.images[0]}}">
+                <img class="image" src="{{item.images | default(value=[]) | first}}">
             </a>
             {% endfor %}
 			</div>
