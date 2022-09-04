@@ -5,8 +5,8 @@ use http_types::{Method, Request, Url};
 use serde::{Deserialize, Serialize};
 use smol::Async;
 
-const LATEST_URL: &str = "https://news-at.zhihu.com/api/3/news/latest";
-const BEFORE_DATE_URL: &str = "https://news-at.zhihu.com/api/3/news/before/";
+const LATEST_URL: &str = "https://news-at.zhihu.com/api/4/stories/latest";
+const BEFORE_DATE_URL: &str = "https://news-at.zhihu.com/api/4/stories/before/";
 
 pub async fn get_latest() -> Result<Content> {
     request(LATEST_URL).await

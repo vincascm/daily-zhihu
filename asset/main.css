@@ -77,6 +77,20 @@ button, p, pre {
 .banner .date {
     letter-spacing: 0.06rem;
     margin-right: 0.75rem;
+    text-align: center;
+}
+
+.banner .date .day {
+    font-weight: bold;
+    font-size: 1.0rem;
+    padding-bottom: 0.1rem;
+}
+
+.banner .date .month {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1;
+    color: #444;
 }
 
 .item-list {
@@ -112,10 +126,14 @@ button, p, pre {
 }
 
 .read-more {
-    padding: 0.382rem 1rem;
-    border-radius: 4px;
+    width: 79px;
+    height: 35px;
+    line-height: 31px;
+    text-align: center;
+    border-radius: 15.5px;
     background: #03a9f4;
-    font-size: 13px;
+    font-size: 16px;
+    color: #fff;
 }
 
 a:link.read-more {

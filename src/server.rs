@@ -1,15 +1,32 @@
 use std::net::{SocketAddr, TcpListener};
 
 use anyhow::{Context, Result};
-use chrono::NaiveDate;
+use chrono::{NaiveDate, Datelike};
 use http_types::{
     mime::{CSS, HTML, ICO, PLAIN, PNG},
     Mime, Request, Response, StatusCode,
 };
 use smol::{block_on, spawn, Async};
+use serde::Serialize;
 use tera::Tera;
 
 use crate::zhihu_api::{get_before_date, get_latest, Content};
+
+pub fn listen(addr: SocketAddr) -> Result<()> {
+    block_on(async {
+        let listener = Async::<TcpListener>::bind(addr)?;
+        loop {
+            let (stream, _) = listener.accept().await?;
+            let stream = async_dup::Arc::new(stream);
+            spawn(async move {
+                if let Err(err) = async_h1::accept(stream, serve).await {
+                    println!("Connection error: {:#?}", err);
+                }
+            })
+            .detach();
+        }
+    })
+}
 
 fn response_asset(mime: Mime, asset: &[u8]) -> Response {
     let mut res = Response::new(StatusCode::Ok);
@@ -24,11 +41,8 @@ async fn render_content(content: Content) -> Result<Response> {
     let mut context = Context::new();
     context.insert("content", &content);
     let cal_date = NaiveDate::parse_from_str(&content.date, "%Y%m%d")?;
-    let cal_date = cal_date.format("%m月%d日").to_string();
-    context.insert("cal_date", &cal_date);
+    context.insert("cal_date", &CalDate::new(cal_date));
     let string = Tera::one_off(include_str!("../templates/index.html"), &context, false)?;
-    //let tera = Tera::new("templates/*")?;
-    //let string = tera.render("index.html", &context)?;
     let mut res = Response::new(StatusCode::Ok);
     res.set_content_type(HTML);
     res.set_body(string);
@@ -62,18 +76,36 @@ async fn serve(req: Request) -> http_types::Result<Response> {
     })
 }
 
-pub fn listen(addr: SocketAddr) -> Result<()> {
-    block_on(async {
-        let listener = Async::<TcpListener>::bind(addr)?;
-        loop {
-            let (stream, _) = listener.accept().await?;
-            let stream = async_dup::Arc::new(stream);
-            spawn(async move {
-                if let Err(err) = async_h1::accept(stream, serve).await {
-                    println!("Connection error: {:#?}", err);
-                }
-            })
-            .detach();
-        }
-    })
+
+#[derive(Serialize)]
+struct CalDate {
+    day: String,
+    month: String,
 }
+
+impl CalDate {
+    fn new(date: NaiveDate) -> Self {
+        Self {
+            day: date.day().to_string(),
+            month: format!("{}月", Self::month_name(date.month())),
+        }
+    }
+
+    fn month_name(month: u32) -> &'static str {
+        match month {
+            2 => "二",
+            3 => "三",
+            4 => "四",
+            5 => "五",
+            6 => "六",
+            7 => "七",
+            8 => "八",
+            9 => "九",
+            10 => "十",
+            11 => "十一",
+            12 => "十二",
+            _ => "一",
+        }
+    }
+}
+
