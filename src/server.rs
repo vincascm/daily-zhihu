@@ -1,30 +1,33 @@
 use std::net::{SocketAddr, TcpListener};
 
 use anyhow::{Context, Result};
+use async_executor::Executor;
+use async_io::{block_on, Async};
 use chrono::{Datelike, NaiveDate};
 use http_types::{
     mime::{CSS, HTML, ICO, PLAIN, PNG},
     Mime, Request, Response, StatusCode,
 };
 use serde::Serialize;
-use smol::{block_on, spawn, Async};
 
 use crate::zhihu_api::{get_before_date, get_latest, Content};
 
 pub fn listen(addr: SocketAddr) -> Result<()> {
-    block_on(async {
+    let executor = Executor::new();
+    block_on(executor.run(async {
         let listener = Async::<TcpListener>::bind(addr)?;
         loop {
             let (stream, _) = listener.accept().await?;
-            let stream = async_dup::Arc::new(stream);
-            spawn(async move {
-                if let Err(err) = async_h1::accept(stream, serve).await {
-                    println!("Connection error: {:#?}", err);
-                }
-            })
-            .detach();
+            executor
+                .spawn(async move {
+                    let stream = async_dup::Arc::new(stream);
+                    if let Err(err) = async_h1::accept(stream, serve).await {
+                        println!("Connection error: {:#?}", err);
+                    }
+                })
+                .detach();
         }
-    })
+    }))
 }
 
 fn response_asset(mime: Mime, asset: &[u8]) -> Response {
