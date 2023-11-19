@@ -33,7 +33,8 @@ button, p, pre {
     display: grid;
     grid-template-rows: auto 1fr auto;
     place-items: center;
-    width: 100%;
+    max-width: 650px;
+    margin: auto;
 }
 
 .banner {

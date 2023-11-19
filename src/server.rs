@@ -1,14 +1,13 @@
 use std::net::{SocketAddr, TcpListener};
 
 use anyhow::{Context, Result};
-use chrono::{NaiveDate, Datelike};
+use chrono::{Datelike, NaiveDate};
 use http_types::{
     mime::{CSS, HTML, ICO, PLAIN, PNG},
     Mime, Request, Response, StatusCode,
 };
-use smol::{block_on, spawn, Async};
 use serde::Serialize;
-use tera::Tera;
+use smol::{block_on, spawn, Async};
 
 use crate::zhihu_api::{get_before_date, get_latest, Content};
 
@@ -36,13 +35,13 @@ fn response_asset(mime: Mime, asset: &[u8]) -> Response {
 }
 
 async fn render_content(content: Content) -> Result<Response> {
-    use tera::Context;
-
-    let mut context = Context::new();
-    context.insert("content", &content);
-    let cal_date = NaiveDate::parse_from_str(&content.date, "%Y%m%d")?;
-    context.insert("cal_date", &CalDate::new(cal_date));
-    let string = Tera::one_off(include_str!("../templates/index.html"), &context, false)?;
+    let string = minijinja::Environment::new().render_str(
+        include_str!("../templates/index.html"),
+        minijinja::context!(
+            content => content,
+            cal_date => CalDate::new(NaiveDate::parse_from_str(&content.date, "%Y%m%d")?),
+        ),
+    )?;
     let mut res = Response::new(StatusCode::Ok);
     res.set_content_type(HTML);
     res.set_body(string);
@@ -76,7 +75,6 @@ async fn serve(req: Request) -> http_types::Result<Response> {
     })
 }
 
-
 #[derive(Serialize)]
 struct CalDate {
     day: String,
@@ -108,4 +106,3 @@ impl CalDate {
         }
     }
 }
-
