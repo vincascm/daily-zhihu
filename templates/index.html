@@ -4,39 +4,41 @@
 		<title>知乎日报网页版 - 每天 3 次，每次 7 分钟</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="description" content="在中国，资讯类移动应用的人均阅读时长是 5 分钟，而在知乎日报，这个数字是 21。以独有的方式为你提供最高质、最深度、最有收获的阅读体验。">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-        <link rel="shortcut icon" href="//static.zhihu.com/heifetz/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="/main.css">
-    </head>
-    <body>
-        <div class="main">
-			<div class="item-list">
-            <div class="banner">
-				<img class="logo" src="/logo.png" alt>
-				<div class="text">
-					<p class="title">知乎日报</p>
-					<p class="desc">每日提供高质量新闻资讯</p>
-				</div>
-                <div class="date">
-                    <div class="day">{{cal_date.day}}</div>
-                    <div class="month">{{cal_date.month}}</div>
-                </div>
-            </div>
-            {% for item in content.stories %}
-            <a class="item" href="{{item.url}}">
-                <div class="text">
-                    <p class="title">{{item.title}}</p>
-                    <span class="tips">{{item.hint}}</span>
-                </div>
-                <img class="image" src="{{item.images | default(value=[]) | first}}">
-            </a>
-            {% endfor %}
-			</div>
-            <a href="/before/{{content.date}}" class="read-more">前一天</a>
-            <div class="footer">
-                <p>该网站内容来自于<a href="//daily.zhihu.com/">知乎日报</a>，仅供个人使用，如有侵权，请联系网站作者处理。</p>
-            </div>
+    <meta name="description" content="在中国，资讯类移动应用的人均阅读时长是 5 分钟，而在知乎日报，这个数字是 21。以独有的方式为你提供最高质、最深度、最有收获的阅读体验。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="//static.zhihu.com/heifetz/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+  </head>
+  <body>
+    <div class="main">
+
+		<div class="item-list">
+      <div class="banner">
+  			<img class="logo" src="/logo.png" alt>
+  			<div class="text">
+  				<p class="title">知乎日报</p>
+  				<p class="desc">每日提供高质量新闻资讯</p>
+  			</div>
+        <div class="date">
+            <div class="day">{{cal_date.day}}</div>
+            <div class="month">{{cal_date.month}}</div>
         </div>
-    </body>
+      </div>
+          {% for item in content.stories %}
+          <a class="item" href="{{item.url}}">
+              <div class="text">
+                  <p class="title">{{item.title}}</p>
+                  <span class="tips">{{item.hint}}</span>
+              </div>
+              <img class="image" src="{{item.images | default(value=[]) | first}}" alt="title image">
+          </a>
+          {% endfor %}
+		</div>
+
+      <a href="/before/{{content.date}}" class="read-more">前一天</a>
+      <div class="footer">
+          <p>该网站内容来自于<a href="//daily.zhihu.com/">知乎日报</a>，仅供个人使用，如有侵权，请联系网站作者处理。</p>
+      </div>
+    </div>
+  </body>
 </html>

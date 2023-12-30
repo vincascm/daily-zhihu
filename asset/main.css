@@ -132,16 +132,16 @@ button, p, pre {
     line-height: 31px;
     text-align: center;
     border-radius: 15.5px;
-    background: #03a9f4;
     font-size: 16px;
-    color: #fff;
 }
 
 a:link.read-more {
+    background: #03a9f4;
     color: #fff;
 }
 
 a:visited.read-more {
+    background: #03a9f4;
     color: #fff;
 }
 
