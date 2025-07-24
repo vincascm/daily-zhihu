@@ -30,7 +30,7 @@
                   <p class="title">{{item.title}}</p>
                   <span class="tips">{{item.hint}}</span>
               </div>
-              <img class="image" src="{{item.images | default(value=[]) | first}}" alt="title image">
+              {% if item.images %}<img class="image" src="{{item.images | first}}" alt="title image">{% endif %}
           </a>
           {% endfor %}
 		</div>

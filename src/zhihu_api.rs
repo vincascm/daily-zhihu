@@ -1,6 +1,6 @@
 use std::net::TcpStream;
 
-use anyhow::{Context, Error, Result};
+use anyhow::{Context, Error, Result, anyhow};
 use http_types::{Method, Request, Url};
 use serde::{Deserialize, Serialize};
 use smol::Async;
@@ -30,7 +30,7 @@ async fn request<T: for<'de> Deserialize<'de>>(url: &str) -> Result<T> {
     let stream = async_native_tls::connect(&host, stream).await?;
     let mut resp = async_h1::connect(stream, req).await.map_err(Error::msg)?;
     if resp.status().is_success() {
-        let data: T = resp.body_json().await.map_err(Error::msg)?;
+        let data: T = resp.body_json().await.map_err(|e| anyhow!("deserialize body json error: {e}"))?;
         Ok(data)
     } else {
         Err(Error::msg("request zhihu api error"))
